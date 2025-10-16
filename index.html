@@ -3,30 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FUTURE DENT - Современная стоматология будущего</title>
+    <title>FUTURE DENT - Улыбка Будущего</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Общий стиль: Современный, красочный, медицинский дизайн */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --bg-light: #f0f4ff;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            --text-primary: #2c3e50;
+            --text-secondary: #7f8c8d;
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f8f9fa;
+            color: var(--text-primary);
+            background: var(--bg-light);
+            overflow-x: hidden;
         }
-        /* Шапка */
+        /* Анимированный фон */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+        }
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        /* Шапка с анимацией */
         header {
-            background: linear-gradient(135deg, #007bff, #00c6ff);
-            color: white;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s ease;
         }
         nav {
             display: flex;
@@ -37,8 +72,12 @@
             padding: 0 20px;
         }
         .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         .nav-links {
             display: flex;
@@ -48,165 +87,214 @@
             margin-left: 2rem;
         }
         .nav-links a {
-            color: white;
+            color: var(--text-primary);
             text-decoration: none;
-            transition: color 0.3s;
+            font-weight: 400;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-gradient);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
         }
         .nav-links a:hover {
-            color: #ffd700;
+            color: #764ba2;
         }
-        /* Геройская секция */
+        /* Геройская секция с параллаксом */
         .hero {
-            background: linear-gradient(rgba(0,123,255,0.8), rgba(0,198,255,0.8)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23e3f2fd" width="1000" height="600"/><circle fill="%23007bff" cx="200" cy="200" r="50"/><circle fill="%2300c6ff" cx="800" cy="400" r="30"/></svg>');
-            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
-            padding: 150px 20px 100px;
-            margin-top: 80px;
+            background: var(--primary-gradient);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle fill="url(%23a)" cx="200" cy="200" r="100"/><circle fill="url(%23a)" cx="800" cy="600" r="80"/><circle fill="url(%23a)" cx="300" cy="700" r="120"/></svg>') no-repeat center/cover;
+        }
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+            padding: 0 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .hero h1 {
-            font-size: 3rem;
+            font-size: 4rem;
+            font-weight: 700;
             margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             margin-bottom: 2rem;
+            opacity: 0.9;
         }
         .cta-button {
-            background: #ffd700;
-            color: #007bff;
-            padding: 1rem 2rem;
+            background: var(--secondary-gradient);
+            color: white;
+            padding: 1.2rem 3rem;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.3);
         }
         .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255,215,0,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
         }
-        /* Основные секции */
+        /* Секции с карточками */
         .section {
-            padding: 80px 20px;
+            padding: 100px 20px;
             max-width: 1200px;
             margin: 0 auto;
         }
         .section h2 {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #007bff;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 4rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        /* Секция "Записаться на прием" */
-        .get-care {
-            background: #e8f5e8;
-        }
-        .care-grid {
+        .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
-        .care-item {
+        .card {
             background: white;
-            padding: 2rem;
-            border-radius: 10px;
+            padding: 2.5rem;
+            border-radius: 20px;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .care-item:hover {
-            transform: translateY(-5px);
-        }
-        .care-item i {
-            font-size: 3rem;
-            color: #28a745;
-            margin-bottom: 1rem;
-        }
-        /* Секция "Живи здоровее" */
-        .live-healthier {
-            background: #fff3cd;
-        }
-        .health-tips {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        .tip {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .tip h3 {
-            color: #ffc107;
-            margin-bottom: 1rem;
-        }
-        /* Секция "Почему выбрать нас" */
-        .why-choose {
-            background: #d1ecf1;
-        }
-        .why-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-        .why-item {
-            text-align: center;
-            padding: 2rem;
-        }
-        .why-item i {
-            font-size: 4rem;
-            color: #17a2b8;
-            margin-bottom: 1rem;
-        }
-        /* Секция "Помощь" */
-        .need-help {
-            background: #f8d7da;
-            text-align: center;
-        }
-        .search-bar {
-            max-width: 600px;
-            margin: 2rem auto;
-        }
-        .search-bar input {
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #dc3545;
+            height: 100%;
+            background: var(--success-gradient);
+            opacity: 0.1;
+            transition: left 0.5s ease;
+        }
+        .card:hover::before {
+            left: 0;
+        }
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        /* Уникальная секция с советами */
+        .tips-section {
+            background: var(--secondary-gradient);
+            color: white;
+        }
+        .tips-section .card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+        .tips-section .card h3 {
+            color: white;
+        }
+        .tips-section .card p {
+            color: rgba(255,255,255,0.9);
+        }
+        /* Форма поиска */
+        .search-section {
+            background: var(--success-gradient);
+            text-align: center;
+        }
+        .search-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .search-input {
+            width: 100%;
+            padding: 1.5rem;
+            border: none;
             border-radius: 50px;
             font-size: 1.1rem;
-        }
-        /* Секция "Для специалистов" */
-        .for-providers {
-            background: #d4edda;
-        }
-        .providers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-        .provider-link {
-            background: white;
-            padding: 1rem;
             text-align: center;
-            border-radius: 5px;
-            text-decoration: none;
-            color: #28a745;
-            transition: background 0.3s;
+            box-shadow: 0 5px 20px rgba(67, 233, 123, 0.3);
         }
-        .provider-link:hover {
-            background: #28a745;
+        /* Секция почему мы */
+        .why-section .grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+        .why-card {
+            text-align: center;
+        }
+        .why-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2rem;
             color: white;
         }
         /* Футер */
         footer {
-            background: #343a40;
+            background: var(--primary-gradient);
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: 3rem 20px;
         }
-        .news {
-            background: #495057;
-            padding: 2rem;
-            margin-top: 2rem;
+        .news-bar {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
         }
         /* Адаптивность */
         @media (max-width: 768px) {
@@ -214,18 +302,29 @@
                 display: none;
             }
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
+            }
+            .section {
+                padding: 60px 20px;
             }
         }
-        /* Иконки (используем Font Awesome для примера, в реальности подключить CDN) */
-        /* Для демонстрации используем Unicode символы */
-        .icon-patient { content: '👤'; }
-        .icon-award { content: '🏆'; }
-        .icon-team { content: '👥'; }
-        .icon-innov { content: '🔬'; }
     </style>
 </head>
 <body>
+    <div class="animated-bg"></div>
+    <!-- Генерация частиц -->
+    <script>
+        for(let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 6 + 's';
+            particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.querySelector('.animated-bg').appendChild(particle);
+        }
+    </script>
+
     <!-- Шапка -->
     <header>
         <nav>
@@ -233,7 +332,8 @@
             <ul class="nav-links">
                 <li><a href="#home">Главная</a></li>
                 <li><a href="#services">Услуги</a></li>
-                <li><a href="#about">О нас</a></li>
+                <li><a href="#tips">Советы</a></li>
+                <li><a href="#why">О нас</a></li>
                 <li><a href="#contact">Контакты</a></li>
             </ul>
         </nav>
@@ -241,139 +341,140 @@
 
     <!-- Геройская секция -->
     <section id="home" class="hero">
-        <h1>Каждый зуб заслуживает ухода мирового класса</h1>
-        <p>Мы здесь, когда вам нужна помощь — для любого ухода за улыбкой в мире</p>
-        <a href="#get-care" class="cta-button">Записаться на прием</a>
+        <div class="hero-content">
+            <h1>Улыбка, Которая Сияeт Будущим</h1>
+            <p>Открываем эру инновационной стоматологии с технологиями завтрашнего дня. Ваша идеальная улыбка начинается здесь.</p>
+            <a href="#services" class="cta-button">Начать Путь к Улыбке</a>
+        </div>
     </section>
 
-    <!-- Секция "Записаться на прием" -->
-    <section id="get-care" class="section get-care">
-        <h2>Записаться на прием</h2>
-        <div class="care-grid">
-            <div class="care-item">
-                <div class="icon-patient">🦷</div>
-                <h3>Консультация</h3>
-                <p>Легко запишитесь на первичную консультацию с нашим специалистом.</p>
-                <a href="#" class="cta-button">Записаться</a>
+    <!-- Секция услуг -->
+    <section id="services" class="section">
+        <h2>Наши Услуги</h2>
+        <div class="grid">
+            <div class="card">
+                <span class="card-icon">🦷</span>
+                <h3>Имплантация</h3>
+                <p>Передовые импланты для естественной и долговечной улыбки.</p>
+                <a href="#" class="cta-button" style="background: var(--accent-gradient); margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Записаться</a>
             </div>
-            <div class="care-item">
-                <div class="icon-patient">😊</div>
-                <h3>Лечение</h3>
-                <p>Современные процедуры для вашего комфорта и здоровья.</p>
-                <a href="#" class="cta-button">Записаться</a>
+            <div class="card">
+                <span class="card-icon">😁</span>
+                <h3>Отбеливание</h3>
+                <p>Безопасное и эффективное осветление зубов с лазерными технологиями.</p>
+                <a href="#" class="cta-button" style="background: var(--accent-gradient); margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Записаться</a>
             </div>
-            <div class="care-item">
-                <div class="icon-patient">✨</div>
+            <div class="card">
+                <span class="card-icon">🛡️</span>
                 <h3>Профилактика</h3>
-                <p>Регулярные проверки для идеальной улыбки.</p>
-                <a href="#" class="cta-button">Записаться</a>
+                <p>Персонализированные планы для предотвращения проблем с зубами.</p>
+                <a href="#" class="cta-button" style="background: var(--accent-gradient); margin-top: 1rem; display: inline-block; padding: 0.8rem 1.5rem; font-size: 0.9rem;">Записаться</a>
             </div>
         </div>
     </section>
 
-    <!-- Секция "Живи здоровее" -->
-    <section class="section live-healthier">
-        <h2>Живи здоровее: Советы по уходу за полостью рта</h2>
-        <div class="health-tips">
-            <div class="tip">
-                <h3>Чистка зубов</h3>
-                <p>Чистите зубы дважды в день по 2 минуты для предотвращения кариеса.</p>
+    <!-- Секция советов -->
+    <section id="tips" class="section tips-section">
+        <h2 style="color: white;">Советы для Здоровой Улыбки</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Ежедневная Чистка</h3>
+                <p>Используйте электрическую щетку и фторсодержащую пасту для максимальной защиты.</p>
             </div>
-            <div class="tip">
+            <div class="card">
                 <h3>Питание</h3>
-                <p>Ограничьте сладкое и пейте больше воды для здоровых зубов.</p>
+                <p>Добавьте кальций и витамин D в рацион для сильных зубов.</p>
             </div>
-            <div class="tip">
-                <h3>Посещения</h3>
-                <p>Посещайте стоматолога каждые 6 месяцев для профилактики.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Секция "Нужна помощь?" -->
-    <section class="section need-help">
-        <h2>Нужна помощь?</h2>
-        <p>У вас есть вопрос? Мы хотим сделать поиск ответов простым. Получите ответы онлайн быстро.</p>
-        <div class="search-bar">
-            <input type="text" placeholder="Поиск по сайту...">
-        </div>
-    </section>
-
-    <!-- Секция "Почему выбрать FUTURE DENT" -->
-    <section class="section why-choose">
-        <h2>Почему выбрать FUTURE DENT?</h2>
-        <div class="why-grid">
-            <div class="why-item">
-                <div class="icon-award">👤</div>
-                <h3>Пациентоориентированный уход</h3>
-                <p>Мы слушаем вас и ставим вашу улыбку на первое место.</p>
-            </div>
-            <div class="why-item">
-                <div class="icon-award">🏆</div>
-                <h3>Национальное признание</h3>
-                <p>Глобальная экспертиза в стоматологии.</p>
-            </div>
-            <div class="why-item">
-                <div class="icon-team">👥</div>
-                <h3>Сотрудничество специалистов</h3>
-                <p>Команда опытных врачей для лучших результатов.</p>
-            </div>
-            <div class="why-item">
-                <div class="icon-innov">🔬</div>
-                <h3>Инновации и исследования</h3>
-                <p>Передовые технологии и клинические испытания.</p>
+            <div class="card">
+                <h3>Регулярные Проверки</h3>
+                <p>Не ждите боли — посещайте нас каждые полгода.</p>
             </div>
         </div>
     </section>
 
-    <!-- Секция "Уход рядом с вами" -->
-    <section class="section" style="background: #fff3cd;">
-        <h2>FUTURE DENT рядом с вами</h2>
-        <p>Наши клиники в удобных локациях для вашего комфорта.</p>
-        <div style="text-align: center; margin-top: 2rem;">
-            <a href="#" class="cta-button">Найти ближайшую клинику</a>
+    <!-- Секция поиска -->
+    <section class="section search-section">
+        <h2 style="color: white;">Нужна Помощь?</h2>
+        <p style="color: white; font-size: 1.2rem;">Поищите ответы на ваши вопросы</p>
+        <form class="search-form">
+            <input type="text" class="search-input" placeholder="Введите ваш вопрос...">
+        </form>
+    </section>
+
+    <!-- Секция почему мы -->
+    <section id="why" class="section">
+        <h2>Почему FUTURE DENT?</h2>
+        <div class="grid">
+            <div class="card why-card">
+                <div class="why-icon">🎯</div>
+                <h3>Инновации</h3>
+                <p>Мы используем AI и 3D-печать для точного лечения.</p>
+            </div>
+            <div class="card why-card">
+                <div class="why-icon">👨‍⚕️</div>
+                <h3>Эксперты</h3>
+                <p>Команда из 50+ специалистов с международным опытом.</p>
+            </div>
+            <div class="card why-card">
+                <div class="why-icon">🌟</div>
+                <h3>Комфорт</h3>
+                <p>VR-релаксация и безболезненные процедуры.</p>
+            </div>
+            <div class="card why-card">
+                <div class="why-icon">📍</div>
+                <h3>Доступность</h3>
+                <p>Клиники в каждом районе города.</p>
+            </div>
         </div>
     </section>
 
-    <!-- Секция "Для специалистов" -->
-    <section id="for-providers" class="section for-providers">
-        <h2>Для специалистов</h2>
-        <div class="providers-grid">
-            <a href="#" class="provider-link">Присоединиться к команде</a>
-            <a href="#" class="provider-link">Карьера</a>
-            <a href="#" class="provider-link">Направить пациента</a>
-            <a href="#" class="provider-link">Образование</a>
-            <a href="#" class="provider-link">Исследования</a>
-            <a href="#" class="provider-link">Все ресурсы</a>
+    <!-- Футер -->
+    <footer id="contact">
+        <div class="news-bar">
+            <h3>Последние Новости</h3>
+            <p>Новая технология отбеливания доступна! Узнайте больше.</p>
         </div>
-    </section>
-
-    <!-- Футер с новостями -->
-    <footer>
-        <div class="news">
-            <h3>Новости FUTURE DENT</h3>
-            <p>Загрузка последних обновлений...</p>
-            <a href="#" style="color: #ffc107;">Подробнее</a>
-        </div>
-        <p>&copy; 2025 FUTURE DENT. Все права защищены.</p>
+        <p>&copy; 2025 FUTURE DENT. Создано с ❤️ для ваших улыбок.</p>
     </footer>
 
     <script>
-        // Простой JS для поиска (демо)
-        document.querySelector('.search-bar input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                alert('Поиск: ' + this.value);
-            }
-        });
-
         // Плавная прокрутка
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
             });
+        });
+
+        // Поиск
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                alert('Поиск по запросу: ' + this.value + '. Результаты загружаются...');
+            }
+        });
+
+        // Анимация появления карточек
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
         });
     </script>
 </body>
