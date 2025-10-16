@@ -185,16 +185,20 @@
             width: 500px;
             height: 500px;
             background: 
-                radial-gradient(circle, var(--primary) 0%, transparent 70%),
-                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="teeth" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="none"/><path d="M5,5 L15,5 L15,15 L5,15 Z" fill="none" stroke="%2300f0ff" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23teeth)"/></svg>');
+                radial-gradient(circle, rgba(0, 240, 255, 0.2) 0%, transparent 70%),
+                url('https://www.iduntal.com/uploads/allimg/66b46c0706c49.jpg') center/cover no-repeat; /* Заменили на фото оборудования GSL5Z */
             border-radius: 50%;
-            opacity: 0.7;
-            animation: float 6s ease-in-out infinite;
+            opacity: 0.8;
+            animation: rotateFloat 8s ease-in-out infinite; /* Изменили анимацию на ротацию + плавание */
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(-50%) rotate(0deg); }
-            50% { transform: translateY(-55%) rotate(5deg); }
+        @keyframes rotateFloat { /* Новая анимация: ротация + лёгкое плавание */
+            0%, 100% { 
+                transform: translateY(-50%) rotate(0deg) scale(1); 
+            }
+            50% { 
+                transform: translateY(-55%) rotate(360deg) scale(1.05); 
+            }
         }
 
         /* Features Section */
@@ -482,7 +486,7 @@
                 <button class="btn-secondary">Узнать больше</button>
             </div>
         </div>
-        <div class="hero-image"></div>
+        <div class="hero-image"></div> <!-- Здесь круг с новым фоном и анимацией -->
     </section>
 
     <!-- Features Section -->
