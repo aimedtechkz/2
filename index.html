@@ -124,6 +124,15 @@
             box-shadow: 0 10px 20px rgba(0, 240, 255, 0.3);
         }
 
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--light);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
         /* Hero Section */
         .hero {
             min-height: 100vh;
@@ -432,6 +441,18 @@
             
             .nav-links {
                 display: none;
+                flex-direction: column;
+                gap: 1rem;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10, 10, 26, 0.9);
+                padding: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
             }
             
             .mobile-menu-btn {
@@ -476,6 +497,7 @@
                 <a href="#contact">Контактная информация</a>
             </nav>
             <a href="#contact" class="cta-button">Оставить заявку</a>
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
         </div>
     </header>
 
@@ -486,7 +508,7 @@
             <p>Высокотехнологичное оборудование, цифровые решения и гарантия качества для новых горизонтов.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="cta-button">Связаться с нами</a>
-                <button class="btn-secondary">Узнать больше</button>
+                <a href="#equipment" class="btn-secondary">Каталог оборудования</a>
             </div>
         </div>
         <div class="hero-image"></div>
@@ -540,7 +562,7 @@
             </div>
             <div class="service-card">
                 <div class="service-icon">
-                    <i class="fas fa-implant"></i>
+                    <i class="fas fa-tooth"></i>
                 </div>
                 <h3>Имплантация</h3>
                 <p>Цифровая планировка, мгновенная нагрузка с титановыми блоками</p>
@@ -579,7 +601,7 @@
     <!-- Equipment Section -->
     <section class="equipment" id="equipment">
         <h2 class="section-title">Современное <span class="gradient-text">оборудование</span></h2>
-        <p class="equipment-intro">Мы оснащены передовым оборудованием и материалами от Glorious Dental Materials Co. Ltd. - ведущего производителя, специализирующегося на dental materials и CAD/CAM оборудовании. Посвящено продвижению здоровья полости рта через инновации. Вот полный список ключевых компонентов нашего арсенала с подробными описаниями и фото:</p>
+        <p class="technology-intro">Мы оснащены передовым оборудованием и материалами от Glorious Dental Materials Co. Ltd. - ведущего производителя, специализирующегося на dental materials и CAD/CAM оборудовании. Посвящено продвижению здоровья полости рта через инновации. Вот полный список ключевых компонентов нашего арсенала с подробными описаниями и фото:</p>
         <div class="features-grid">
             <div class="feature-card">
                 <img src="images/1.jpg" alt="Glorious GSL 5Z Dental Milling Machine" class="equipment-image">
@@ -663,18 +685,18 @@
     <!-- Appointment Section -->
     <section class="appointment" id="contact">
         <h2 class="section-title">Записаться на <span class="gradient-text">прием</span></h2>
-        <div class="appointment-form">
+        <form class="appointment-form">
             <div class="form-group">
                 <label for="name">Ваше имя</label>
-                <input type="text" id="name" placeholder="Иван Иванов">
+                <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
             </div>
             <div class="form-group">
                 <label for="phone">Телефон</label>
-                <input type="tel" id="phone" placeholder="+7 (999) 999-99-99">
+                <input type="tel" id="phone" name="phone" placeholder="+7 (999) 999-99-99" required>
             </div>
             <div class="form-group">
                 <label for="service">Услуга</label>
-                <select id="service">
+                <select id="service" name="service" required>
                     <option value="">Выберите услугу</option>
                     <option value="consultation">Консультация</option>
                     <option value="treatment">Лечение</option>
@@ -684,10 +706,10 @@
             </div>
             <div class="form-group">
                 <label for="date">Желаемая дата</label>
-                <input type="date" id="date">
+                <input type="date" id="date" name="date" required>
             </div>
-            <button class="cta-button" style="width: 100%;">Отправить заявку</button>
-        </div>
+            <button type="submit" class="cta-button" style="width: 100%;">Отправить заявку</button>
+        </form>
     </section>
 
     <!-- Footer -->
@@ -706,11 +728,11 @@
             <div class="footer-column">
                 <h3>Услуги</h3>
                 <ul class="footer-links">
-                    <li><a href="#">Имплантация</a></li>
-                    <li><a href="#">Эстетическая стоматология</a></li>
-                    <li><a href="#">Ортодонтия</a></li>
-                    <li><a href="#">Детская стоматология</a></li>
-                    <li><a href="#">Диагностика</a></li>
+                    <li><a href="#services">Имплантация</a></li>
+                    <li><a href="#services">Эстетическая стоматология</a></li>
+                    <li><a href="#services">Ортодонтия</a></li>
+                    <li><a href="#services">Детская стоматология</a></li>
+                    <li><a href="#services">Диагностика</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -729,6 +751,13 @@
     </footer>
 
     <script>
+        // Мобильное меню
+        const mobileBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        mobileBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
         // Плавная прокрутка для якорных ссылок
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -759,7 +788,7 @@
         }, observerOptions);
 
         // Наблюдаем за карточками и секциями
-        document.querySelectorAll('.feature-card, .service-card, .appointment-form, .technology .feature-card').forEach(el => {
+        document.querySelectorAll('.feature-card, .service-card, .appointment-form, .service-support .feature-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -767,10 +796,16 @@
         });
 
         // Обработка формы
-        document.querySelector('.appointment-form button').addEventListener('click', function(e) {
+        document.querySelector('.appointment-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Спасибо! Мы свяжемся с вами в ближайшее время для подтверждения записи.');
-            this.closest('form').reset();
+            // Базовая валидация (можно расширить)
+            if (this.name.value && this.phone.value && this.service.value && this.date.value) {
+                alert('Спасибо! Мы свяжемся с вами в ближайшее время для подтверждения записи.');
+                this.reset();
+            } else {
+                alert('Пожалуйста, заполните все поля.');
+            }
+            // Здесь можно добавить fetch для отправки на сервер
         });
     </script>
 </body>
