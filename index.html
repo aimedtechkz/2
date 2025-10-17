@@ -278,23 +278,44 @@
         .service-card {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
-            padding: 2rem;
+            padding: 1.5rem;
             text-align: center;
             transition: all 0.3s ease;
             border: 1px solid transparent;
+            overflow: hidden;
         }
 
         .service-card:hover {
             border-color: var(--primary);
             background: rgba(0, 240, 255, 0.05);
+            transform: translateY(-5px);
         }
 
-        .service-icon {
-            font-size: 3rem;
+        .service-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
             margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-image {
+            transform: scale(1.05);
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
             background: var(--gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            line-height: 1.4;
         }
 
         /* Technology Section */
@@ -479,6 +500,10 @@
             .hero-buttons {
                 justify-content: center;
             }
+
+            .service-image {
+                height: 120px;
+            }
         }
     </style>
 </head>
@@ -554,30 +579,22 @@
         <h2 class="section-title">Наши <span class="gradient-text">услуги</span></h2>
         <div class="services-grid">
             <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-tooth"></i>
-                </div>
+                <img src="images/service-delivery.jpg" alt="Поставка оборудования" class="service-image">
                 <h3>Поставка оборудования</h3>
                 <p>Полный цикл: от подбора до монтажа цифровых комплексов</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-tooth"></i>
-                </div>
+                <img src="images/service-maintenance.jpg" alt="Технический сервис" class="service-image">
                 <h3>Технический сервис</h3>
                 <p>Гарантийное и постгарантийное обслуживание, ремонт и аудиты оборудования</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-brain"></i>
-                </div>
+                <img src="images/service-training.jpg" alt="Обучение персонала" class="service-image">
                 <h3>Обучение персонала</h3>
                 <p>Практические тренинги от базового освоения техники до работы с сопутствующим ПО</p>
             </div>
             <div class="service-card">
-                <div class="service-icon">
-                    <i class="fas fa-child"></i>
-                </div>
+                <img src="images/service-consultation.jpg" alt="Экспертные консультации" class="service-image">
                 <h3>Экспертные консультации</h3>
                 <p>Помощь в интеграции цифровых решений, подборе моделей и оптимизации клинических процессов</p>
             </div>
